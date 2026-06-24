@@ -16,12 +16,16 @@ export default function CategoryFilter({ selectedId, onSelect }: CategoryFilterP
             <button
               key={id}
               onClick={() => onSelect(id)}
-              className="flex flex-col items-center gap-3 group transition-all"
+              /* 🟢 MEJORA DE COMPATIBILIDAD: Agregamos transform-gpu, backface-hidden y antialiased aquí 
+                 Esto le dice al sistema que use la GPU para manejar la animación de transición de manera suave */
+              className="flex flex-col items-center gap-3 group transition-all transform-gpu backface-hidden antialiased"
             >
+              {/* 🟢 OPTIMIZACIÓN DE BORDES: Subimos sutilmente la opacidad del borde inactivo de white/5 a white/10. 
+                  Los bordes extremadamente transparentes (5%) se rompen visualmente en pantallas con baja densidad de píxeles al animarse. */}
               <div className={`p-4 rounded-2xl transition-all duration-300 border ${
                 isSelected 
-                ? "bg-purple-main/10 border-purple-main/50 scale-110 shadow-[0_0_20px_rgba(188,26,254,0.2)]" 
-                : "bg-white/5 border-white/5 hover:border-white/20"
+                  ? "bg-purple-main/10 border-purple-main/50 scale-110 shadow-[0_0_20px_rgba(188,26,254,0.2)]" 
+                  : "bg-white/5 border-white/10 hover:border-white/30"
               }`}>
                 <Icon
                   size={24}
